@@ -1,0 +1,66 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Spark Demo
+
+```{r setup}
+library(ggplot2)
+library(dplyr)
+library(sparklyr)
+```
+
+
+First we connect to spark (see the spark tab). In this case we'll run spark locally. 
+```{r connect}
+sc <- spark_connect(master="local")
+spark_web(sc)
+```
+
+We'll copy into spark the flights dataset (24 MB)
+```{r}
+copy_to(sc, nycflights13::flights, "flights")
+#spark_web(sc)
+```
+
+We use dplyr syntax to filter, mutate, and summarize the data in spark, collect forces the execution and returns the data to R
+```{r}
+flights <- tbl(sc, "flights")
+
+delay <- flights %>% 
+  select(arr_delay,dep_delay, distance) %>% 
+  filter(arr_delay > 15) %>% 
+  mutate(in_air_delay = arr_delay - dep_delay) %>% 
+  group_by(distance) %>% 
+  summarize(avg_in_air_delay=mean(in_air_delay)) %>%
+  collect()
+
+#spark_web(sc)
+```
+
+
+Now we can use R's strength in visualization ...
+```{r}
+library(ggplot2)
+ggplot(data=delay, aes(x=distance, y=avg_in_air_delay))+geom_point() + geom_smooth(method=loess)
+```
+
+Or interactively
+```{r}
+library(highcharter)
+hchart(delay$avg_in_air_delay)
+```
+
+We can also fit a number of ML algorithms. For example, we can fit a linear model in Spark, and then inspect the results in R.
+
+```{r}
+model <- 
+  flights %>% 
+  filter(arr_delay >0, distance>0) %>% 
+  ml_linear_regression(response="arr_delay", features=c("distance"))
+
+summary(model)
+```
+
+
