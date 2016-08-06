@@ -1,4 +1,4 @@
-Chicago R Meetup August 2017
+Notebooks & Sparklyr: Chicago R Meetup August 2017
 ================
 
 R Markdown (See the new [website!](http://rmarkdown.rstudio.com))
