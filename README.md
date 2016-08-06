@@ -21,29 +21,5 @@ Sparklyr
 -   Example of connecting to a Spark cluster, ETL in dplyr, and fitting a ML model
 -   [Website](https://spark.rstudio.com)
 
-htmlwidgets
------------
-
--   Code to find and map your nearest Starbucks!
--   [Website](https://www.htmlwidgets.org)
-
-Shiny & R Markdown
-------------------
-
--   Example of downloading a pdf from R Markdown
--   Example of an [interactive document](http://rmarkdown.rstudio.com/lesson-12.html) using runtime::shiny
-
-Shing Gadgets / Addins
-----------------------
-
--   Example of modifying ggplot through a point-and-click addin, [ggThemeAssist](https://github.com/calligross/ggthemeassist)
-
-flexdashboard
--------------
-
--   Stock price example that lays out htmlwidgets as a dashboard
--   Example of a flexdashboard that incorporates Shiny
-
--   [Website](http://rmarkdown.rstudio.com/flexdashboard/) and [Webinar](https://www.rstudio.com/resources/webinars/introducing-flexdashboards)
 
 Please be sure to follow our [blog](https://blog.rstudio.org) or checkout our [webinar](https://www.rstudio.com/resources/webinars) page. If you use R at work and would like to support us or scale R for the enterprise please checkout our [Pro Products](https://www.rstudio.com/pricing) including [RStudio Connect](https://www.rstudio.com/products/connect) our new tool for managing R content, scheduling Rmd reports, and hosting Shiny apps.
